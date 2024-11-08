@@ -1901,6 +1901,7 @@ impl Pane {
 
         let icon = item.tab_icon(cx);
         let close_side = &ItemSettings::get_global(cx).close_position;
+        let always_show_close_button = &ItemSettings::get_global(cx).always_show_close_button;
         let indicator = render_item_indicator(item.boxed_clone(), cx);
         let item_id = item.item_id();
         let is_first_item = ix == 0;
@@ -1994,8 +1995,7 @@ impl Pane {
                 } else {
                     end_slot_action = &CloseActiveItem { save_intent: None };
                     end_slot_tooltip_text = "Close Tab";
-                    IconButton::new("close tab", IconName::Close)
-                        .visible_on_hover("")
+                    let button = IconButton::new("close tab", IconName::Close)
                         .shape(IconButtonShape::Square)
                         .icon_color(Color::Muted)
                         .size(ButtonSize::None)
@@ -2003,7 +2003,12 @@ impl Pane {
                         .on_click(cx.listener(move |pane, _, cx| {
                             pane.close_item_by_id(item_id, SaveIntent::Close, cx)
                                 .detach_and_log_err(cx);
-                        }))
+                        }));
+                    if !always_show_close_button {
+                        button.visible_on_hover("")
+                    } else {
+                        button
+                    }
                 }
                 .map(|this| {
                     if is_active {

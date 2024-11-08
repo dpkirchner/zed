@@ -40,6 +40,7 @@ pub const LEADER_UPDATE_THROTTLE: Duration = Duration::from_millis(200);
 pub struct ItemSettings {
     pub git_status: bool,
     pub close_position: ClosePosition,
+    pub always_show_close_button: bool,
     pub activate_on_close: ActivateOnClose,
     pub file_icons: bool,
 }
@@ -77,6 +78,10 @@ pub struct ItemSettingsContent {
     ///
     /// Default: right
     close_position: Option<ClosePosition>,
+    /// Whether to always show the close button on a tab item.
+    ///
+    /// Default: false
+    always_show_close_button: Option<bool>,
     /// Whether to show the file icon for a tab.
     ///
     /// Default: false

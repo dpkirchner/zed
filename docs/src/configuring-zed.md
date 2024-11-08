@@ -588,6 +588,7 @@ List of `string` values
 ```json
 "tabs": {
   "close_position": "right",
+  "always_show_close_button": false,
   "file_icons": false,
   "git_status": false,
   "activate_on_close": "history"
@@ -617,6 +618,12 @@ List of `string` values
   "close_position": "left"
 }
 ```
+
+### Always Show Close
+
+- Description: Whether to always show the close button for a tab.
+- Setting: `always_show_close_button`
+- Default: `false`
 
 ### File Icons
 
